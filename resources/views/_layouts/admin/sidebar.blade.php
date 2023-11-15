@@ -3,20 +3,19 @@
 
 	{{-- @if($loginUser->canSee('books')) --}}
   <div class="sidebar-item-group @if($menu_open == 'books') open @endif">
-    <div class="sidebar-item">Cursos</div>
+    <div class="sidebar-item">Containers</div>
     <div class="sidebar-subitems">
-      <div class="sidebar-item"><a href="/admin/collections">Livres</a></div>
-      <div class="sidebar-item"><a href="/admin/series">Pós-Graduações</a></div>
+      <div class="sidebar-item"><a href="/admin/containers">Containers</a></div>
+      <div class="sidebar-item"><a href="/admin/arduinos">Arduinos</a></div>
     </div>
   </div>
 
 	<div class="sidebar-item-group @if($menu_open == 'books_other') open @endif">
-		<div class="sidebar-item">Docentes</div>
+		<div class="sidebar-item">Sensors</div>
 		<div class="sidebar-subitems">
-			<div class="sidebar-item"><a href="/admin/countryCities">Docentes</a></div>
+			<div class="sidebar-item"><a href="/admin/sensors">Sensors</a></div>
     </div>
   </div>
-
 
 	{{-- @endif --}}
 

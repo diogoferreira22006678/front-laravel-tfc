@@ -1,8 +1,8 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<title>Docentes Convidados</title>
+<title>HydroGrowthManager</title>
 
-<meta name="description" content="Docentes Convidados" />
+<meta name="description" content="HydroGrowthManager" />
 
 <!-- Libraries -->
 <link rel="stylesheet" href="/lib/fontawesome/css/all.min.css"/>

@@ -1,5 +1,5 @@
 <header>
-  <h4>Docentes Convidados</h4>
+  <h4>HydroGrowthManager</h4>
   
   <!-- Admin in the top right corner of a flex container -->
 
