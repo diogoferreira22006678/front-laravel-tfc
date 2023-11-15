@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/admin/table/containers', 'TableController_api@containers');
+Route::post('/admin/table/arduinos', 'TableController_api@arduinos');

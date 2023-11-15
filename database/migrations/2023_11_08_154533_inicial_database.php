@@ -12,12 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         // create table container 
-        Schema::create('container', function (Blueprint $table) {
+        Schema::create('containers', function (Blueprint $table) {
             $table->id('container_id');
             $table->string('container_name');
             $table->integer('container_dimension');
-            $table->integer('container_location');
-
+            $table->string('container_location');
             $table->timestamps();
         });
 
@@ -28,7 +27,7 @@ return new class extends Migration
             $table->integer('arduino_capacity');
             $table->unsignedBigInteger('container_id');
 
-            $table->foreign('container_id')->references('container_id')->on('container');
+            $table->foreign('container_id')->references('container_id')->on('containers');
         });
 
         // create table values
@@ -39,9 +38,9 @@ return new class extends Migration
             $table->float('value_temp');
             $table->float('value_electric_condutivity');
             $table->dateTime('value_time');
-            $table->unsignedBigInteger('arduino_id');
+            $table->unsignedBigInteger('container_id');
 
-            $table->foreign('arduino_id')->references('arduino_id')->on('arduinos');
+            $table->foreign('container_id')->references('container_id')->on('containers');
         });
 
         // create table reles
@@ -49,9 +48,9 @@ return new class extends Migration
             $table->id('rele_id');
             $table->string('rele_name');
             $table->boolean('rele_state');
-            $table->unsignedBigInteger('container_id');
+            $table->unsignedBigInteger('arduino_id');
 
-            $table->foreign('container_id')->references('container_id')->on('container');
+            $table->foreign('arduino_id')->references('arduino_id')->on('arduinos');
         });
 
         // create sensor_types

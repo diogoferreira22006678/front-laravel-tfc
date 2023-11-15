@@ -1,26 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Utils;
-use App\Models\Tag;
-
-use App\Models\Book;
-use App\Models\Page;
-use App\Models\Admin;
-use App\Models\Person;
-use App\Models\BindType;
-use App\Models\AdminPerm;
-use App\Models\CoverType;
-use App\Models\PaperType;
-use App\Models\PrintType;
-use App\Models\Publisher;
-use App\Models\Collection;
-use App\Models\CountryCity;
 use Illuminate\Http\Request;
-use App\Models\FunctionModel;
-use App\Models\ExtraCoverType;
-use App\Models\PublicationType;
-use App\Models\AdminPermRelation;
+use App\Utils;
+use App\Models\Container;
+use App\Models\Arduino;
+use App\Models\Rele;
+use App\Models\Sensor;
+use App\Models\SensorType;
+use App\Models\Value;
 
 class TableController_api extends Controller{
   use \App\Traits\ApiUtils;
@@ -114,72 +102,12 @@ class TableController_api extends Controller{
   }
 
   /* Calls */
-  public function books(Request $request){
-    $query = Book::with('publishers', 'authors');
+  public function containers(Request $request){
+    $query = Container::with('values', 'arduinos');
     return $this->search($query, $request);
   }
-  public function coverTypes(Request $request){
-    $query = CoverType::query();
-    return $this->search($query, $request);
-  }
-  public function bindTypes(Request $request){
-    $query = BindType::query();
-    return $this->search($query, $request);
-  }
-  public function extraCoverTypes(Request $request){
-    $query = ExtraCoverType::query();
-    return $this->search($query, $request);
-  }
-  public function paperTypes(Request $request){
-    $query = PaperType::query();
-    return $this->search($query, $request);
-  }
-  public function printTypes(Request $request){
-    $query = PrintType::query();
-    return $this->search($query, $request);
-  }
-  public function publicationTypes(Request $request){
-    $query = PublicationType::query();
-    return $this->search($query, $request);
-  }
-  public function countryCities(Request $request){
-    $query = CountryCity::with('country');
-    return $this->search($query, $request);
-  }
-  public function people(Request $request){
-    $query = Person::query();
-    return $this->search($query, $request);
-  }
-  public function publishers(Request $request){
-    $query = Publisher::query();
-    return $this->search($query, $request);
-  }
-  public function functions(Request $request){
-    $query = FunctionModel::query();
-    return $this->search($query, $request);
-  }
-  public function tags(Request $request){
-    $query = Tag::query();
-    return $this->search($query, $request);
-  }
-  public function users(Request $request){
-    $query = Admin::with('perm');
-    return $this->search($query, $request);
-  }
-  public function perms_relations(Request $request){
-    $query = AdminPermRelation::with('perm');
-    return $this->search($query, $request);
-  }
-  public function perms(Request $request){
-    $query = AdminPerm::with('relations');
-    return $this->search($query, $request);
-  }
-  public function pages(Request $request){
-    $query = Page::query();
-    return $this->search($query, $request);
-  }
-  public function collections(Request $request){
-    $query = Collection::query();
+  public function arduinos(Request $request){
+    $query = Arduino::query();
     return $this->search($query, $request); 
   }
 }
