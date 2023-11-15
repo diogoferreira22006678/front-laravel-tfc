@@ -45,25 +45,16 @@
   ])
     <div id="form-new" api-call="countryCity.new">
       <div class="form-group">
-        <label>Nome</label>
-        <input type="text" class="form-control" name="country_city_name" maxlength="64" required/>
+        <label>Name</label>
+        <input type="text" class="form-control" name="container_name" maxlength="64" required/>
       </div>
       <div class="form-group">
-        <label>Nome EN</label>
-        <input type="text" class="form-control" name="country_city_name_en" maxlength="64" required/>
+        <label>Capacity</label>
+        <input type="number" class="form-control" name="container_dimension" required/>
       </div>
       <div class="form-group">
-        <div><label>País</label></div>
-        @component('_components.formSelect', [
-          'required' => true,
-          'class' => '',
-          'attributes' => 'ajax-url="/api/select/countries"',
-          'name' => 'country_code',
-          'placeholder' => 'Escolhe o país',
-          'array' => [],
-          'key' => 'id',
-          'value' => 'title',
-        ])@endComponent
+        <Label>Location</label>
+        <input type="text" class="form-control" name="container_location" maxlength="64" required/>
       </div>
     </div>
     @slot('footer')
@@ -79,25 +70,16 @@
   ])
     <div id="form-edit" api-call="">
       <div class="form-group">
-        <label>Nome</label>
-        <input type="text" class="form-control" name="country_city_name" maxlength="64" required/>
+        <label>Name</label>
+        <input type="text" class="form-control" name="container_name" maxlength="64" required/>
       </div>
       <div class="form-group">
-        <label>Nome EN</label>
-        <input type="text" class="form-control" name="country_city_name_en" maxlength="64" required/>
+        <label>Capacity</label>
+        <input type="number" class="form-control" name="container_dimension" required/>
       </div>
       <div class="form-group">
-        <div><label>País</label></div>
-        @component('_components.formSelect', [
-          'required' => true,
-          'class' => '',
-          'attributes' => 'ajax-url="/api/select/countries" fill="country:country_code|country_name"',
-          'name' => 'country_code',
-          'placeholder' => 'Escolhe o país',
-          'array' => [],
-          'key' => 'id',
-          'value' => 'title',
-        ])@endComponent
+        <label>Location</label>
+        <input type="text" class="form-control" name="container_location" maxlength="64" required/>
       </div>
     </div>
     @slot('footer')
