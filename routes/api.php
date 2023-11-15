@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/admin/table/containers', 'TableController_api@containers');
 Route::post('/admin/table/arduinos', 'TableController_api@arduinos');
+Route::post('/admin/table/sensors', 'TableController_api@sensors');

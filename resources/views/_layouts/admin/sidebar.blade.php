@@ -2,7 +2,7 @@
 <aside>
 
 	{{-- @if($loginUser->canSee('books')) --}}
-  <div class="sidebar-item-group @if($menu_open == 'books') open @endif">
+  <div class="sidebar-item-group @if($menu_open == 'containers') open @endif">
     <div class="sidebar-item">Containers</div>
     <div class="sidebar-subitems">
       <div class="sidebar-item"><a href="/admin/containers">Containers</a></div>
@@ -10,7 +10,7 @@
     </div>
   </div>
 
-	<div class="sidebar-item-group @if($menu_open == 'books_other') open @endif">
+	<div class="sidebar-item-group @if($menu_open == 'sensors') open @endif">
 		<div class="sidebar-item">Sensors</div>
 		<div class="sidebar-subitems">
 			<div class="sidebar-item"><a href="/admin/sensors">Sensors</a></div>

@@ -110,4 +110,8 @@ class TableController_api extends Controller{
     $query = Arduino::query();
     return $this->search($query, $request); 
   }
+  public function sensors(Request $request){
+    $query = Sensor::with('type');
+    return $this->search($query, $request);
+  }
 }

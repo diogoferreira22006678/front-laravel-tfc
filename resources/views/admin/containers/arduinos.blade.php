@@ -1,5 +1,5 @@
 @extends('_layouts.admin.normal',[
-    'menu_open' => 'books_other',
+    'menu_open' => 'containers',
     'breadcrumbs' => [
         '/admin' => 'Admin',
         'Arduinos'
