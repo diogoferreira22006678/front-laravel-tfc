@@ -28,14 +28,17 @@ class MakeApiCall extends Command
     public function handle()
     {
         // Core api
-        $response = Http::get('https://api.example.com/endpoint');
+        // $response = Http::get('https://api.example.com/endpoint');
+        $this->info('Making API call...');
+        //  php artisan make:api-call
+        // * * * * * cd /path-to-your-laravel-app && php artisan schedule:run >> /dev/null 2>&1
 
-        if($response->successful()){
-            $this->info('Success');
-        }
-        else{
-            $this->error('Error');
-        }
+        // if($response->successful()){
+        //     $this->info('Success');
+        // }
+        // else{
+        //     $this->error('Error');
+        // }
 
 
     }
