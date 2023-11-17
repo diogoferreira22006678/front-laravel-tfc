@@ -1,5 +1,6 @@
 <?php
 
+use App\Api\CoreApi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,4 +38,10 @@ Route::get('/admin/arduinos', function(){
 
 Route::get('/admin/sensors', function(){
     return view('admin.sensors.sensors');
+});
+
+Route::get('/sendTest', function () {
+    $coreApi = new CoreApi();
+    $response = $coreApi->sendTest();
+    return response()->json($response);
 });

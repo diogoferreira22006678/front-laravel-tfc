@@ -573,7 +573,7 @@
 
         <div class="row">
 
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+          {{-- <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member" data-aos="fade-up" data-aos-delay="100">
               <div class="member-img">
                 <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
@@ -643,7 +643,7 @@
                 <span>Accountant</span>
               </div>
             </div>
-          </div>
+          </div> --}}
 
         </div>
 
@@ -734,8 +734,8 @@
             <div class="footer-info">
               <h3>Gp<span>.</span></h3>
               <p>
-                A108 Adam Street <br>
-                NY 535022, USA<br><br>
+                {{-- A108 Adam Street <br>
+                NY 535022, USA<br><br> --}}
                 <strong>Phone:</strong> +1 5589 55488 55<br>
                 <strong>Email:</strong> info@example.com<br>
               </p>
@@ -784,18 +784,6 @@
       </div>
     </div>
 
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Gp</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
   </footer><!-- End Footer -->
 
   <div id="preloader"></div>

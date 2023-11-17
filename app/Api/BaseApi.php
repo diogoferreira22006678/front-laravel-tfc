@@ -30,11 +30,9 @@ class BaseApi{
                 RequestOptions::BODY => $data
             ];
         }
-        
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
-        ])->send($method, $this->base_url.$url, $params);
-
+        ])->send($method, $url, $params);
         $status = $response->getStatusCode();
         $statusi = floor($status / 100);
         if($statusi != 2){
@@ -66,6 +64,7 @@ class BaseApi{
             }
             throw new \Exception($status);
         }
+        return $response->json();
     }
 
 }

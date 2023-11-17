@@ -23,9 +23,10 @@ Route::post('/admin/table/containers', 'TableController_api@containers');
 Route::post('/admin/table/arduinos', 'TableController_api@arduinos');
 Route::post('/admin/table/sensors', 'TableController_api@sensors');
 
-Route::get('/getCourseGroupings', function () {
+Route::post('/sendTest', function () {
     $coreApi = new CoreApi();
-    $response = $coreApi->getCourseGroupings();
+    $response = $coreApi->sendTest();
 
-    dd($response);
+    // json response
+    return response()->json($response);
 });

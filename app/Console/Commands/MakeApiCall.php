@@ -27,18 +27,26 @@ class MakeApiCall extends Command
      */
     public function handle()
     {
+
+        $data = [
+            "micrcocontrollerID"=>"AA:BB:CC",
+            "type"=>"TDS",
+            "value"=>"102.2"
+        ];
+
         // Core api
-        // $response = Http::get('https://api.example.com/endpoint');
+
+        $response = Http::post('https://hydrogrowthmanager.azurewebsites.net/automation/sendTest', $data);
+
         $this->info('Making API call...');
         //  php artisan make:api-call
         // * * * * * cd /path-to-your-laravel-app && php artisan schedule:run >> /dev/null 2>&1
 
-        // if($response->successful()){
-        //     $this->info('Success');
-        // }
-        // else{
-        //     $this->error('Error');
-        // }
+        if($response->successful()){
+            $this->info('Success', $response->body());
+        }else{
+             $this->error('Error', $response->body());
+        }
 
 
     }
