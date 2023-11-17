@@ -1,5 +1,6 @@
 <?php
 
+use App\Api\CoreApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/admin/table/containers', 'TableController_api@containers');
 Route::post('/admin/table/arduinos', 'TableController_api@arduinos');
 Route::post('/admin/table/sensors', 'TableController_api@sensors');
+
+Route::get('/getCourseGroupings', function () {
+    $coreApi = new CoreApi();
+    $response = $coreApi->getCourseGroupings();
+
+    dd($response);
+});
