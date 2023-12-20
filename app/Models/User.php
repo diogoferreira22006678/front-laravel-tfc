@@ -1,45 +1,39 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-
-class User extends Authenticatable
+use App\Session;
+class User extends Model 
 {
-    use HasApiTokens, HasFactory, Notifiable;
+  protected $table = 'users';
+  protected $primaryKey = 'user_id';
+  protected $guarded = [];
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+  private static $current = null;
+  public static function getCurrent(){
+    if(self::$current) return self::$current;
+    $id = Session::get(Session::USER);
+    if($id == null) return null;
+    self::$current = self::where('user_id', $id)->first();
+    return self::$current;
+  }
+  public static function setCurrent($curr){
+    Session::put(Session::USER, $curr->user_id);
+    return self::$current = $curr;
+  }
+  public static function logout(){
+    Session::pull(Session::USER);
+    self::$current = null;
+  }
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+  public function canSee($perm){
+    if($this->user_super == 1) return true;
+    return $this->perm->relations()->where('perm_name', $perm)->exists();
+  }
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+  public function perm(){
+    return $this->hasOne('App\Models\Perm', 'perm_id', 'perm_id');
+  }
 }

@@ -6,7 +6,7 @@
   @if(isset($loginUser))
   <div class="dropdown p-4 d-flex justify-content-end">
     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-toggle="dropdown" aria-expanded="false">
-        <span class="d-none d-sm-inline mx-1">{{ $loginUser->admin_name }}</span>
+        <span class="d-none d-sm-inline mx-1">{{ $loginUser->user_name }}</span>
     </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" id="signOut">
           <form method="POST" style="margin:0" action="{{ route('logout') }}">

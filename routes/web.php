@@ -24,20 +24,38 @@ Route::get('/details', function(){
 
 /*****************BACK************************/
 
-Route::get('/admin', function(){
-    return view('admin.index');
+Route::get('/login', function(){
+    return view('admin.login');
+})->name('route.login');
+
+Route::middleware('perms:autorized')->group(function () {
+
+    Route::get('/admin', function(){
+        return view('admin.index');
+    })->name('routeHomepage');
+
+    Route::get('/admin/containers', function(){
+        return view('admin.containers.containers');
+    });
+
+    Route::get('/admin/arduinos', function(){
+        return view('admin.containers.arduinos');
+    });
+
+    Route::get('/admin/sensors', function(){
+        return view('admin.sensors.sensors');
+    });
+
 });
 
-Route::get('/admin/containers', function(){
-    return view('admin.containers.containers');
-});
+Route::middleware('perms:users')->group(function () {
 
-Route::get('/admin/arduinos', function(){
-    return view('admin.containers.arduinos');
-});
+    Route::get('/admin/users', function(){
+        return view('admin.users.users');
+    });
 
-Route::get('/admin/sensors', function(){
-    return view('admin.sensors.sensors');
+    Route::get('/admin/perms', 'UserController@perms');
+
 });
 
 Route::get('/sendTest', function () {

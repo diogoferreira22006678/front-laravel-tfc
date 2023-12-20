@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 class RouteServiceProvider extends ServiceProvider
 {
     /**
-     * The path to your application's "home" route.
+     * The path to the "home" route for your application.
      *
      * Typically, users are redirected here after authentication.
      *
@@ -19,7 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
 
-   /**
+    /**
      * The controller namespace for the application.
      *
      * When present, controller route declarations will automatically be prefixed with this namespace.
@@ -61,4 +61,3 @@ class RouteServiceProvider extends ServiceProvider
         });
     }
 }
-

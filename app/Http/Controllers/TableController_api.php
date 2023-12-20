@@ -1,14 +1,16 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Utils;
-use App\Models\Container;
-use App\Models\Arduino;
+use App\Models\Perm;
 use App\Models\Rele;
-use App\Models\Sensor;
-use App\Models\SensorType;
+use App\Models\User;
 use App\Models\Value;
+use App\Models\Sensor;
+use App\Models\Arduino;
+use App\Models\Container;
+use App\Models\SensorType;
+use Illuminate\Http\Request;
 
 class TableController_api extends Controller{
   use \App\Traits\ApiUtils;
@@ -114,4 +116,13 @@ class TableController_api extends Controller{
     $query = Sensor::with('type');
     return $this->search($query, $request);
   }
+  public function users(Request $request){
+    $query = User::with('perm');
+    return $this->search($query, $request);
+  }
+  public function perms(Request $request){
+    $query = Perm::query();
+    return $this->search($query, $request);
+  }
+  
 }
