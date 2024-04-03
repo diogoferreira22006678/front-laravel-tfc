@@ -1,6 +1,11 @@
 <?php
 
 use App\Api\CoreApi;
+use App\Models\Rele;
+use App\Models\Sensor;
+use App\Models\Arduino;
+use App\Models\Container;
+use App\Models\SensorType;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +49,52 @@ Route::middleware('perms:autorized')->group(function () {
 
     Route::get('/admin/sensors', function(){
         return view('admin.sensors.sensors');
+    });
+
+    Route::get('/saveData', function(){
+        $api = new CoreApi();
+        $response = $api->RequestContainers();
+    
+        foreach ($response as $containerData) {
+            // Create Container
+            $container = new Container();
+            $container->container_name = $containerData['name'];
+            $container->container_dimension = $containerData['dimension'];
+            $container->container_location = $containerData['location'];
+            $container->save();
+    
+            // Get the container ID
+            $containerId = $container->container_id;
+    
+            // Iterate over microcontrollers
+            foreach ($containerData['microcontrollers'] as $microcontrollerData) {
+                $arduino = new Arduino();
+                $arduino->arduino_name = $microcontrollerData['name'];
+                $arduino->arduino_capacity = $microcontrollerData['capacity'];
+                $arduino->container_id = $containerId; // Set container_id
+                $arduino->save();
+    
+                // Get the arduino ID
+                $arduinoId = $arduino->arduino_id;
+    
+                // Iterate over relays
+                foreach ($microcontrollerData['relays'] as $relayData) {
+                    $rele = new Rele();
+                    $rele->rele_name = $relayData['name'];
+                    $rele->rele_state = $relayData['state'];
+                    $rele->arduino_id = $arduinoId; // Set arduino_id
+                    $rele->save();
+    
+                    // Save Sensor
+                    $sensorType = SensorType::firstOrCreate(['sensor_type_name' => $relayData['sensor']['type']]);
+                    $sensor = new Sensor();
+                    $sensor->sensor_name = $relayData['sensor']['name'];
+                    $sensor->sensor_type_id = $sensorType->sensor_type_id;
+                    $sensor->rele_id = $rele->rele_id; // Set rele_id
+                    $sensor->save();
+                }
+            }
+        }
     });
 
 });

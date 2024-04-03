@@ -34,9 +34,20 @@ return new class extends Migration
         });
 
         // create table values
-        Schema::create('values', function (Blueprint $table) {
+        Schema::create('target_values', function (Blueprint $table){
             $table->id('value_id');
             // value_ph, value_temp, value_electric_conductivity all float and value_time 
+            $table->float('value_ph');
+            $table->float('value_temp');
+            $table->float('value_electric_condutivity');
+            $table->unsignedBigInteger('container_id');
+
+            $table->foreign('container_id')->references('container_id')->on('containers');
+        });
+
+        // create table real_time_values
+        Schema::create('real_time_values', function (Blueprint $table){
+            $table->id('real_time_value_id');
             $table->float('value_ph');
             $table->float('value_temp');
             $table->float('value_electric_condutivity');

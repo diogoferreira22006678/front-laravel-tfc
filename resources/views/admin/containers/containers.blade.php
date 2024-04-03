@@ -45,16 +45,28 @@
   ])
     <div id="form-new" api-call="countryCity.new">
       <div class="form-group">
-        <label>Name</label>
+        <label>Nome</label>
         <input type="text" class="form-control" name="container_name" maxlength="64" required/>
       </div>
       <div class="form-group">
-        <label>Capacity</label>
-        <input type="number" class="form-control" name="container_dimension" required/>
+        <label><label>Arduinos</label></label>
+						@component('_components.formSelect', [
+						'multiple' => true,
+						'required' => true,
+						'class' => '',
+						'attributes' => 'ajax-url="/api/select/arduinos"',
+						'name' => 'arduinos[]',
+						'placeholder' => 'Escolhe os Arduinos',
+						'array' => [],
+						])@endComponent
       </div>
       <div class="form-group">
-        <Label>Location</label>
+        <Label>Localização</label>
         <input type="text" class="form-control" name="container_location" maxlength="64" required/>
+      </div>
+      <div class="form-group">
+        <label>Dimensão</label>
+        <input type="text" class="form-control" name="container_dimension" maxlength="64" required/>
       </div>
     </div>
     @slot('footer')
@@ -70,16 +82,28 @@
   ])
     <div id="form-edit" api-call="">
       <div class="form-group">
-        <label>Name</label>
+        <label>Nome</label>
         <input type="text" class="form-control" name="container_name" maxlength="64" required/>
       </div>
       <div class="form-group">
-        <label>Capacity</label>
-        <input type="number" class="form-control" name="container_dimension" required/>
+        <label><label>Arduinos</label></label>
+						@component('_components.formSelect', [
+						'multiple' => true,
+						'required' => true,
+						'class' => '',
+						'attributes' => 'ajax-url="/api/select/arduinos fill="arduinos:arduino_id|arduino_name"',
+						'name' => 'arduinos[]',
+						'placeholder' => 'Escolhe os Arduinos',
+						'array' => [],
+						])@endComponent
       </div>
       <div class="form-group">
-        <label>Location</label>
+        <Label>Localização</label>
         <input type="text" class="form-control" name="container_location" maxlength="64" required/>
+      </div>
+      <div class="form-group">
+        <label>Dimensão</label>
+        <input type="text" class="form-control" name="container_dimension" maxlength="64" required/>
       </div>
     </div>
     @slot('footer')
@@ -115,17 +139,6 @@
 @section('scripts')
 <script>
 let dt = document.getElementById('dt');
-
-let modalMerge = document.getElementById('modal-merge');
-let $modalMerge = $(modalMerge);
-let formMerge = modalMerge.querySelector('[api-call]');
-formMerge.addEventListener('api-response', e => {
-	if(!e.isOK) return;
-
-	dt.refresh();
-	$modalMerge.modal('hide');
-});
-let selectMerge = formMerge.querySelector('[select2]');
 
 let modalNew = document.getElementById('modal-new');
 let $modalNew = $(modalNew);

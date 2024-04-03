@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Value extends Model
 {
-    protected $table = 'values';
-    protected $primaryKey = 'value_id';
+    protected $table = 'real_time_values';
+    protected $primaryKey = 'real_time_value_id';
     protected $guarded = [];
     public $timestamps = false;
     protected $hidden = [];

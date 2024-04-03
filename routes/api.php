@@ -26,6 +26,10 @@ Route::post('/login', 'LoginController@login')->name('login');
 
 Route::post('/logout', 'LoginController@logout')->name('logout');
 
+/*-----------------------------------Select----------------------------------*/
+
+Route::get('/select/arduinos', 'SelectController_api@arduinos');
+
 /*-----------------------------------Table-----------------------------------*/
 
 Route::post('/admin/table/containers', 'TableController_api@containers');
@@ -42,4 +46,11 @@ Route::post('/sendTest', function () {
 
     // json response
     return response()->json($response);
+});
+
+Route::post('/RequestContainers', function () {
+    $coreApi = new CoreApi();
+    $response = $coreApi->RequestContainers();
+
+    
 });
