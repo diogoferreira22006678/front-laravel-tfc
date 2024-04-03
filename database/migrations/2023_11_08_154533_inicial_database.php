@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+    // alterar value para valores que queremos e adicionar outra tabela de 1 para N com o container com os valores atuais do container e o seu histórico
+
     /**
      * Run the migrations.
      */
@@ -26,7 +29,7 @@ return new class extends Migration
             $table->string('arduino_name');
             $table->integer('arduino_capacity');
             $table->unsignedBigInteger('container_id');
-
+            
             $table->foreign('container_id')->references('container_id')->on('containers');
         });
 

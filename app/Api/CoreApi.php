@@ -20,6 +20,10 @@ class CoreApi extends BaseApi {
         return $this->post('SendTest', ['micrcocontrollerID' => 'AA:BB:CC', 'type' => 'TDS', 'value' => '102.2']);
     }
 
+    public function RequestContainers(){
+        return $this->post('RequestContainers');
+    }
+
     /*
     {
     "container": {

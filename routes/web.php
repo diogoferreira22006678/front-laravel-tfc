@@ -63,3 +63,9 @@ Route::get('/sendTest', function () {
     $response = $coreApi->sendTest();
     return response()->json($response);
 });
+
+Route::get('/RequestContainers', function () {
+    $coreApi = new CoreApi();
+    $response = $coreApi->RequestContainers();
+    return response()->json($response);
+});
