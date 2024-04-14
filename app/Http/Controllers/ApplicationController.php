@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Container;
-use App\Models\Arduino;
+use App\Api\CoreApi;
 use App\Models\Rele;
 use App\Models\Sensor;
+use App\Models\Arduino;
+use App\Models\Container;
 use App\Models\SensorType;
+use App\Models\TargetValue;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApplicationController extends Controller
 {
@@ -46,5 +49,46 @@ class ApplicationController extends Controller
                 }
             }
         }
+    }
+
+    function index(){
+        // current user 
+        $user = session('user');
+
+
+        // get all containers that belongs to the user
+        $containers = Container::where('user_id', $user)->with('targetValue')->get();
+
+        return view('admin.index', ['containers' => $containers]);
+        
+    }
+
+    function containers(Request $request){
+
+        // check if container already has a desired value, if so, update it
+        $target = TargetValue::where('container_id', $request->container_id)->first();
+        if ($target) {
+            $target->value_ph = $request->value_ph;
+            $target->value_temp = $request->value_temp;
+            $target->value_electric_condutivity = $request->value_electric_condutivity;
+            $target->save();
+        } else {
+            $target = new TargetValue();
+            $target->value_ph = $request->value_ph;
+            $target->value_temp = $request->value_temp;
+            $target->value_electric_condutivity = $request->value_electric_condutivity;
+            $target->container_id = $request->container_id;
+            $target->save();
+        }
+
+        // get Container by id
+        $container = Container::find($request->container_id);
+        // api call to update it in the backend
+        $api = new CoreApi();
+        $api->setDesiredValue($container->container_serial, $request->value_ph, 1);
+        $api->setDesiredValue($container->container_serial, $request->value_temp, 4);
+        $api->setDesiredValue($container->container_serial, $request->value_electric_condutivity, 2);
+        // refresh the page
+        return redirect()->route('admin.index');
     }
 }

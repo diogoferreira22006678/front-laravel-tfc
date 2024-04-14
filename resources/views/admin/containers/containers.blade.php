@@ -7,8 +7,7 @@
 ])
 
 @section('buttons')
-<button data-target="#modal-merge" data-toggle="modal" class="btn btn-success">Update</button>
-<button data-target="#modal-new" data-toggle="modal" class="btn btn-success">Create</button>
+  <button id="update-button" class="btn btn-success">Update</button>
 @endsection
 
 @section('body')
@@ -31,8 +30,7 @@
     <td>${container_dimension}</td>
     <td>${container_location}</td>
     <td>
-      <i class="fas fa-pencil-alt" option="edit"></i>
-      <i class="fas fa-trash-alt" option="delete"></i>
+      <i class="fas fa-eye" option="view"></i>
     </td>
   </tr>
   </script>
@@ -168,6 +166,32 @@ formDelete.addEventListener('api-response', e => {
 
 	dt.refresh();
 	$modalDelete.modal('hide');
+});
+
+document.getElementById('update-button').addEventListener('click', e => {
+  console.log('Update button clicked'); // Log to check if the event listener is working
+
+  // Make an AJAX request to the server
+  $.ajax({
+    url: '/api/admin/RequestContainers',
+    method: 'POST',
+    processData: false,
+    contentType: false,
+    success: function(data){
+      // Log the response to check if it's coming as expected
+      console.log('Update request response:', data);
+
+      // If the response is not OK, return
+      if(!data.isOK){
+        dt.refresh();
+        return;
+      }
+    },
+    error: function(xhr, status, error) {
+      // Log any errors for debugging
+      console.error('Error:', error);
+    }
+  });
 });
 
 window.addEventListener('option-click', e => {

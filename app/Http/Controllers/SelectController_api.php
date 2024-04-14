@@ -1,25 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Tag;
-use App\Models\Book;
-use App\Models\Person;
-use App\Models\Arduino;
-use App\Models\Country;
-use App\Models\BindType;
-use App\Models\Language;
-use App\Models\AdminPerm;
 
-use App\Models\CoverType;
-use App\Models\PaperType;
-use App\Models\PrintType;
-use App\Models\Publisher;
-use App\Models\CountryCity;
+use App\Models\Arduino;
+use App\Models\Perm;
 
 use Illuminate\Http\Request;
-use App\Models\FunctionModel;
-use App\Models\ExtraCoverType;
-use App\Models\PublicationType;
 
 class SelectController_api extends Controller{
   use \App\Traits\ApiUtils;
@@ -41,6 +27,11 @@ class SelectController_api extends Controller{
   public function arduinos(Request $request) {
     $query = Arduino::select('arduino_id as id', 'arduino_name as text');
     return $this->search($query, 'arduino_name', $request);
+  }
+
+  public function perms(Request $request) {
+    $query = Perm::select('perm_id as id', 'perm_name as text');
+    return $this->search($query, 'perm_name', $request);
   }
 
 }

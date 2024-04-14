@@ -14,12 +14,50 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+        Schema::create('perms', function (Blueprint $table) {
+            $table->id('perm_id');
+            $table->string('perm_name');
+
+            $table->timestamps();
+        });
+
+        Schema::create('perms_relations', function (Blueprint $table) {
+            $table->id('perm_relation_id');
+            $table->unsignedBigInteger('perm_id');
+            $table->string('perm_name');
+            
+            $table->foreign('perm_id')->references('perm_id')->on('perms')->onDelete('cascade');
+            $table->timestamps();
+        });
+
+        Schema::create('users', function (Blueprint $table) {
+            $table->id('user_id');
+            $table->string('user_name');
+            $table->string('user_pass');
+            $table->integer('user_super');
+            $table->unsignedBigInteger('perm_id')->nullable();
+            
+            $table->foreign('perm_id')->references('perm_id')->on('perms')->onDelete('cascade');
+            $table->timestamps();
+        });
+
+        \DB::table('users')->insert([
+            'user_name' => 'root',
+            'user_pass' => \Hash::make('wo9384yjfrtw3978gnh89x04fng'),
+            'user_super' => 1,
+        ]);
+
         // create table container 
         Schema::create('containers', function (Blueprint $table) {
             $table->id('container_id');
+            $table->string('container_serial');
             $table->string('container_name');
             $table->integer('container_dimension');
             $table->string('container_location');
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('user_id')->on('users');
             $table->timestamps();
         });
 
@@ -83,38 +121,6 @@ return new class extends Migration
             $table->foreign('sensor_type_id')->references('sensor_type_id')->on('sensor_types');
             $table->foreign('rele_id')->references('rele_id')->on('reles');
         });
-        Schema::create('perms', function (Blueprint $table) {
-            $table->id('perm_id');
-            $table->string('perm_name');
-
-            $table->timestamps();
-        });
-
-        Schema::create('perms_relations', function (Blueprint $table) {
-            $table->id('perm_relation_id');
-            $table->unsignedBigInteger('perm_id');
-            $table->string('perm_name');
-            
-            $table->foreign('perm_id')->references('perm_id')->on('perms')->onDelete('cascade');
-            $table->timestamps();
-        });
-
-        Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id');
-            $table->string('user_name');
-            $table->string('user_pass');
-            $table->integer('user_super');
-            $table->unsignedBigInteger('perm_id')->nullable();
-            
-            $table->foreign('perm_id')->references('perm_id')->on('perms')->onDelete('cascade');
-            $table->timestamps();
-        });
-
-        \DB::table('users')->insert([
-            'user_name' => 'root',
-            'user_pass' => \Hash::make('wo9384yjfrtw3978gnh89x04fng'),
-            'user_super' => 1,
-        ]);
 
     }
 
